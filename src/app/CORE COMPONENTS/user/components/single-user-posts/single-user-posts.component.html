@@ -1,0 +1,9 @@
+<div *ngFor="let post of singlePosts">
+ <b>Post id:</b> {{post.id}} <br>
+  <b>Title:</b> {{post.title}} <br>
+  <button [routerLink]="['details', post.id]" [state]="{post : post}">details</button>
+  <hr>
+</div>
+<router-outlet></router-outlet>
+
+

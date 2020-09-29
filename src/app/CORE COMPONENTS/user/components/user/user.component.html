@@ -1,0 +1,9 @@
+
+<div>
+ <b>User id:</b> {{user?.id}} <br>
+ <b>User name:</b> {{user?.name}} <br>
+ <b>User email:</b> {{user?.email}} <br>
+  <button><a [routerLink]="['details', user.id]">Details</a></button>
+  <button><a routerLink="{{user.id}}/posts">See user {{user.id}} posts</a></button>
+  <hr>
+</div>

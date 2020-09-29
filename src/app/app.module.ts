@@ -1,41 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {UsersService} from "./services/users.service";
 import {HttpClientModule} from "@angular/common/http";
-import { UserComponent } from './components/user/user.component';
-import {RouterModule} from "@angular/router";
-import { AllUsersComponent } from './components/all-users/all-users.component';
-import {PostsService} from "./services/posts.service";
-import { PostComponent } from './components/post/post/post.component';
-import { AllPostsComponent } from './components/all-posts/all-posts/all-posts.component';
-import {CommentsService} from "./services/comments.service";
-import { AllCommentComponent } from './components/all-comment/all-comment/all-comment.component';
-import { CommentComponent } from './components/comment/comment/comment.component';
+import {RouterModule, Routes} from "@angular/router";
+
+const routes : Routes = [
+  {path : 'users', loadChildren : () => import('./CORE COMPONENTS/user/user.module').then(m => m.UserModule)},
+  {path: 'posts', loadChildren : () => import('./CORE COMPONENTS/post/post.module').then(m => m.PostModule)},
+  {path: 'comments', loadChildren : () => import('./CORE COMPONENTS/comment/comment.module').then(m => m.CommentModule)}
+]
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserComponent,
-    AllUsersComponent,
-    PostComponent,
-    AllPostsComponent,
-    AllCommentComponent,
-    CommentComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {path: 'users', component: AllUsersComponent},
-      {path: 'posts', component: AllPostsComponent},
-      {path: 'comments', component: AllCommentComponent}
-    ])
+    RouterModule.forRoot(routes),
   ],
-  providers: [UsersService, PostsService, CommentsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
